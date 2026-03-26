@@ -2,6 +2,14 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+> **BOMO → BAM:** The ontology was renamed from BOMO to BAM to shift focus from operational workflows to the **physical assets** that buildings are composed of — their topology, elements, equipment, and systems. Domain-specific applications are developed as **modular extensions** rather than built into the core.
+
+> **🔥 Active Development: [FiCR (Fire Compliance and Risk Analysis)](https://github.com/RainGo111/FiCR)** is the first and most actively developed BAM extension, targeting **automated fire safety compliance checking and risk assessment** in existing buildings. It serves as both a standalone contribution to fire safety informatics and a proof of concept for BAM's extensibility architecture.
+>
+> [![FiCR Repo](https://img.shields.io/badge/GitHub-FiCR-blue?logo=github)](https://github.com/RainGo111/FiCR) &ensp; **Namespace:** `https://w3id.org/bam/ficr#`
+
+---
+
 **BAM** is a top-level domain ontology for building digital twins during the
 operation, maintenance, and renovation stages of a building's lifecycle.
 It integrates building spatial topology, physical assets, equipment systems,
@@ -18,26 +26,18 @@ extensibility toward [Brick Schema](https://brickschema.org/) and
 - **Serialisation:** OWL 2 / Turtle (`.ttl`)
 - **Version:** 0.1.0
 
-## Active Development: FiCR
+## Five-Layer Architecture
 
-> **🔥 [FiCR — Fire Compliance and Risk Analysis Ontology](https://github.com/RainGo111/FiCR)**
->
-> [![FiCR Repo](https://img.shields.io/badge/GitHub-FiCR-blue?logo=github)](https://github.com/RainGo111/FiCR)
+BAM is organised into five layers, from raw data at the bottom to
+reusable foundation ontologies at the top:
 
-The current primary development effort is **FiCR** (Fire Compliance and
-Risk Analysis Ontology), a domain-specific extension built on top of BAM.
-
-- **Namespace:** `https://w3id.org/bam/ficr#`
-- **Scope:** Fire safety compliance checking, risk analysis, regulatory
-  requirements (UK Approved Document B), purpose groups, fire safety roles,
-  boundary assumptions, and impairment states.
-
-FiCR demonstrates how BAM's thin-core architecture supports rich,
-regulation-driven domain extensions while maintaining semantic
-interoperability with the BAM core modules. It draws on M1 for spatial
-context, M2 for inspection workflows, M4 for responsible persons, and M5
-for evidence provenance — illustrating the cross-module integration that
-BAM is designed to enable.
+| Layer | Role |
+| --- | --- |
+| **Foundation** | Reusable existing ontologies (BOT, Brick, SSN, etc.) |
+| **BAM Core** | Universal digital twin operating primitives (M1–M5) |
+| **Application** | Pluggable domain-specific extensions (e.g. FiCR) |
+| **Data Integration** | Multi-modal data processing, validation and standardisation |
+| **Metadata** | Raw unstructured data storage and indexing |
 
 ![BAM Five-Layer Architecture](images/BAM_Five_Layer_Architecture.png)
 
