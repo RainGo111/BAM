@@ -1,0 +1,2026 @@
+@prefix : <https://w3id.org/bam#> .
+@prefix bot: <https://w3id.org/bot#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <https://w3id.org/bam#> .
+
+<https://w3id.org/bam> rdf:type owl:Ontology ;
+                        owl:versionIRI <https://w3id.org/bam/0.1.0> ;
+                        rdfs:comment "BAM is top-level ontology that integrates multiple aspects of data such as building space, facilities and equipment, sensor data, maintenance activities, etc. at the semantic level to support the digital twin representation and intelligent management of buildings during the operation, maintenance, and renovation stages."@en ,
+                                     "FiCR (Fire Compliance and Risk Analysis Ontology) is the actively developed domain extension."@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/contributor
+<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+<http://purl.org/dc/terms/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/issued
+<http://purl.org/dc/terms/issued> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+<http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+<http://purl.org/dc/terms/modified> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+<http://purl.org/dc/terms/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+<http://purl.org/vocab/vann/preferredNamespacePrefix> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+<http://purl.org/vocab/vann/preferredNamespaceUri> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2003/06/sw-vocab-status/ns#term_status
+<http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#altLabel
+skos:altLabel rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2006/vcard/ns#fn
+<http://www.w3.org/2006/vcard/ns#fn> rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/domainIncludes
+<https://schema.org/domainIncludes> rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/name
+<https://schema.org/name> rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/rangeIncludes
+<https://schema.org/rangeIncludes> rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/bam#according_to
+:according_to rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://w3id.org/bam#affectsAsset
+:affectsAsset rdf:type owl:ObjectProperty ;
+              rdfs:domain :Event ;
+              rdfs:range :PhysicalObject ;
+              rdfs:comment "Links an event to the physical object or system it affects."@en ;
+              rdfs:label "affectsAsset"@en .
+
+
+###  https://w3id.org/bam#assignedTo
+:assignedTo rdf:type owl:ObjectProperty ;
+            rdfs:domain :Task ;
+            rdfs:range :Agent ;
+            rdfs:label "assignedTo"@en .
+
+
+###  https://w3id.org/bam#basedOnRegulation
+:basedOnRegulation rdf:type owl:ObjectProperty ;
+                   rdfs:comment "Links a compliance assessment to the regulatory source used to derive the requirement(s)."@en ;
+                   rdfs:label "basedOnRegulation"@en .
+
+
+###  https://w3id.org/bam#derivedFrom
+:derivedFrom rdf:type owl:ObjectProperty ;
+             rdfs:domain :DataAsset ;
+             rdfs:range :DataAsset ;
+             rdfs:comment "Links a data asset to another data asset from which it was derived, e.g. a digital model derived from a point cloud."@en ;
+             rdfs:label "derivedFrom"@en .
+
+
+###  https://w3id.org/bam#generatedBy
+:generatedBy rdf:type owl:ObjectProperty ;
+             rdfs:domain :DataAsset ;
+             rdfs:range :Agent ;
+             rdfs:comment "Links a data asset to the agent (person, robot, or software) that produced it."@en ;
+             rdfs:label "generatedBy"@en .
+
+
+###  https://w3id.org/bam#hasClassification
+:hasClassification rdf:type owl:ObjectProperty ;
+                   owl:inverseOf :isClassificationOf ;
+                   rdfs:comment "General property relating an entity to its classification."@en ;
+                   rdfs:label "hasClassification"@en .
+
+
+###  https://w3id.org/bam#hasComponent
+:hasComponent rdf:type owl:ObjectProperty ;
+              rdfs:comment "Expressing the compositional relationship of components"@en ;
+              rdfs:label "hasComponent"@en .
+
+
+###  https://w3id.org/bam#hasConnectionWith
+:hasConnectionWith rdf:type owl:ObjectProperty ;
+                   rdfs:comment "indicates that the two individuals have a passageway."@en ;
+                   rdfs:label "hasConnectionWith"@en .
+
+
+###  https://w3id.org/bam#hasDataAsset
+:hasDataAsset rdf:type owl:ObjectProperty ;
+              rdfs:range :DataAsset ;
+              rdfs:comment "Links a physical object, zone, or equipment item to a digital data asset that describes or monitors it."@en ;
+              rdfs:label "hasDataAsset"@en .
+
+
+###  https://w3id.org/bam#hasElementUsage
+:hasElementUsage rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :hasUsageType ;
+                 owl:inverseOf :isElementUsageOf ;
+                 rdfs:domain bot:Element ;
+                 rdfs:comment "Assigns a functional element usage classification to a building element."@en ;
+                 rdfs:label "hasElementUsage"@en .
+
+
+###  https://w3id.org/bam#hasNotionalBoundary
+:hasNotionalBoundary rdf:type owl:ObjectProperty ;
+                     rdfs:domain bot:Building ;
+                     rdfs:range bot:Building ;
+                     rdfs:label "hasNotionalBoundary"@en .
+
+
+###  https://w3id.org/bam#hasSpaceUsage
+:hasSpaceUsage rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :hasUsageType ;
+               owl:inverseOf :isSpaceUsageOf ;
+               rdfs:range :SpaceUsage ;
+               rdfs:comment "Assigns a functional space usage classification (e.g. Kitchen, Corridor) to a zone or space."@en ;
+               rdfs:label "hasSpaceUsage"@en .
+
+
+###  https://w3id.org/bam#hasState
+:hasState rdf:type owl:ObjectProperty ;
+          rdfs:comment "Links a physical object, equipment item, or system to its current operational state."@en ;
+          rdfs:label "hasState"@en .
+
+
+###  https://w3id.org/bam#hasUsageType
+:hasUsageType rdf:type owl:ObjectProperty ;
+              owl:inverseOf :isUsageTypeOf ;
+              rdfs:range :UsageType ;
+              rdfs:label "hasUsageType"@en .
+
+
+###  https://w3id.org/bam#hasUtilizationPurpose
+:hasUtilizationPurpose rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :hasUsageType ;
+                       owl:inverseOf :isUtilizationPurposeOf ;
+                       rdfs:range :UtilizationPlanning ;
+                       rdfs:comment "Assigns a building planning utilization purpose (e.g. Hotel, Office) to a zone or building."@en ;
+                       rdfs:label "hasUtilizationPurpose"@en .
+
+
+###  https://w3id.org/bam#isClassificationOf
+:isClassificationOf rdf:type owl:ObjectProperty ;
+                    rdfs:comment "Inverse of hasClassification."@en ;
+                    rdfs:label "isClassificationOf"@en .
+
+
+###  https://w3id.org/bam#isComponentOf
+:isComponentOf rdf:type owl:ObjectProperty ;
+               rdfs:comment "Links an individual equipment item to the building system it belongs to. Inverse direction of hasComponent at the instance level."@en ;
+               rdfs:label "isComponentOf"@en .
+
+
+###  https://w3id.org/bam#isElementUsageOf
+:isElementUsageOf rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :isUsageTypeOf ;
+                  rdfs:comment "Inverse of hasElementUsage."@en ;
+                  rdfs:label "isElementUsageOf"@en .
+
+
+###  https://w3id.org/bam#isLocatedIn
+:isLocatedIn rdf:type owl:ObjectProperty ;
+             rdfs:range bot:Zone ;
+             rdfs:comment "describe the location and/or surroundings of a place."@en ;
+             rdfs:label "isLocatedIn"@en .
+
+
+###  https://w3id.org/bam#isSpaceUsageOf
+:isSpaceUsageOf rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :isUsageTypeOf ;
+                rdfs:comment "Inverse of hasSpaceUsage."@en ;
+                rdfs:label "isSpaceUsageOf"@en .
+
+
+###  https://w3id.org/bam#isStoreyAbove
+:isStoreyAbove rdf:type owl:ObjectProperty ;
+               rdfs:comment "Indicates that the subject storey is directly above the object storey."@en ;
+               rdfs:label "isStoreyAbove"@en .
+
+
+###  https://w3id.org/bam#isStoreyBelow
+:isStoreyBelow rdf:type owl:ObjectProperty ;
+               rdfs:comment "Indicates that the subject storey is directly below the object storey."@en ;
+               rdfs:label "isStoreyBelow"@en .
+
+
+###  https://w3id.org/bam#isTaskAt
+:isTaskAt rdf:type owl:ObjectProperty ;
+          rdfs:domain :Task ;
+          rdfs:range bot:Zone ;
+          rdfs:label "isTaskAt"@en .
+
+
+###  https://w3id.org/bam#isTaskFor
+:isTaskFor rdf:type owl:ObjectProperty ;
+           rdfs:domain :Task ;
+           rdfs:comment "Links a task to the physical object (element, equipment, or content) that it targets."@en ;
+           rdfs:label "isTaskFor"@en .
+
+
+###  https://w3id.org/bam#isUsageTypeOf
+:isUsageTypeOf rdf:type owl:ObjectProperty ;
+               rdfs:label "isUsageTypeOf"@en .
+
+
+###  https://w3id.org/bam#isUtilizationPlanningOf
+:isUtilizationPlanningOf rdf:type owl:ObjectProperty ;
+                         rdfs:label "isUtilizationPlanningOf"@en .
+
+
+###  https://w3id.org/bam#isUtilizationPurposeOf
+:isUtilizationPurposeOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :isUsageTypeOf ;
+                        rdfs:comment "Inverse of hasUtilizationPurpose."@en ;
+                        rdfs:label "isUtilizationPurposeOf"@en .
+
+
+###  https://w3id.org/bam#isZoneUsageOf
+:isZoneUsageOf rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:label "isZoneUsageOf"@en .
+
+
+###  https://w3id.org/bam#performs
+:performs rdf:type owl:ObjectProperty ;
+          rdfs:domain :Agent ;
+          rdfs:range :Task ;
+          rdfs:comment "Links an agent to a task that it executes or has executed."@en ;
+          rdfs:label "performs"@en .
+
+
+###  https://w3id.org/bam#producesEvidence
+:producesEvidence rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Task ;
+                  rdfs:range :EvidenceItem ;
+                  rdfs:comment "Links a task to evidence items it generates."@en ;
+                  rdfs:label "producesEvidence"@en .
+
+
+###  https://w3id.org/bam#supportedByEvidence
+:supportedByEvidence rdf:type owl:ObjectProperty ;
+                     rdfs:comment "Links a boundary assumption or impairment state to the evidence items that justify it."@en ;
+                     rdfs:label "supportedByEvidence"@en .
+
+
+###  https://w3id.org/bam#triggeredBy
+:triggeredBy rdf:type owl:ObjectProperty ;
+             rdfs:domain :Task ;
+             rdfs:range :Event ;
+             rdfs:comment "A task is created because an event (e.g., risk detected) occurred."@en ;
+             rdfs:label "triggeredBy"@en .
+
+
+###  https://w3id.org/bam#triggersEvent
+:triggersEvent rdf:type owl:ObjectProperty ;
+               rdfs:range :Event ;
+               rdfs:comment "Links a physical object to an event that it causes, e.g. equipment failure triggering a fault event."@en ;
+               rdfs:label "triggersEvent"@en .
+
+
+###  https://w3id.org/bam#triggersTask
+:triggersTask rdf:type owl:ObjectProperty ;
+              rdfs:domain :Event ;
+              rdfs:range :Task ;
+              rdfs:comment "Links a trigger event to the task(s) created because of it."@en ;
+              rdfs:label "triggersTask"@en .
+
+
+###  https://w3id.org/bam#usesEvidence
+:usesEvidence rdf:type owl:ObjectProperty ;
+              rdfs:domain :Task ;
+              rdfs:range :EvidenceItem ;
+              rdfs:comment "Links a task to evidence items it consumes as inputs."@en ;
+              rdfs:label "usesEvidence"@en .
+
+
+###  https://w3id.org/bot#adjacentElement
+bot:adjacentElement rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf bot:hasElement ;
+                    owl:propertyDisjointWith bot:intersectingElement ;
+                    rdfs:comment "Relation between a zone and its adjacent building elements, bounding the zone."@en ;
+                    rdfs:label "adjacentElement"@en .
+
+
+###  https://w3id.org/bot#adjacentZone
+bot:adjacentZone rdf:type owl:ObjectProperty ,
+                          owl:SymmetricProperty ;
+                 rdfs:domain bot:Zone ;
+                 rdfs:range bot:Zone ;
+                 owl:propertyDisjointWith bot:intersectsZone ;
+                 rdfs:comment "Relationship between two zones that share a common interface, but do not intersect."@en ;
+                 rdfs:isDefinedBy bot: ;
+                 rdfs:label "adjacentZone"@en .
+
+
+###  https://w3id.org/bot#containsElement
+bot:containsElement rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf bot:hasElement ;
+                    owl:propertyChainAxiom ( bot:containsZone
+                                             bot:containsElement
+                                           ) ;
+                    rdfs:comment "Relation to a building element contained in a zone."@en ;
+                    rdfs:label "containsElement"@en .
+
+
+###  https://w3id.org/bot#containsZone
+bot:containsZone rdf:type owl:ObjectProperty ,
+                          owl:TransitiveProperty ;
+                 rdfs:domain bot:Zone ;
+                 rdfs:range bot:Zone ;
+                 rdfs:comment "Relationship to the subzones of a major zone. A space zone could for instance be contained in a storey zone which is further contained in a building zone. bot:containsZone is a transitive property. This implies that in the previous example a bot:containsZone relationship holds between the space zone and the building zone."@en ;
+                 rdfs:isDefinedBy bot: ;
+                 rdfs:label "containsZone"@en .
+
+
+###  https://w3id.org/bot#has3DModel
+bot:has3DModel rdf:type owl:ObjectProperty ;
+               rdfs:comment "Links any bot:Zone or bot:Element to a IRI that identifies its 3D Model. This 3D Model can then be described using some dedicated RDF vocabulary. Else, the 3D Model IRI could be dereferenceable, and when looking up the IRI one could retrieve a representation of the 3D Model with some existing data format for 3D models."@en ;
+               rdfs:label "has3DModel"@en ;
+               <https://schema.org/domainIncludes> bot:Zone .
+
+
+###  https://w3id.org/bot#hasBuilding
+bot:hasBuilding rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf bot:containsZone ;
+                rdfs:domain bot:Zone ;
+                rdfs:range bot:Building ;
+                rdfs:comment "Relation to buildings contained in a zone. The typical domains of bot:hasBuilding are instances of bot:Site."@en ;
+                rdfs:isDefinedBy bot: ;
+                rdfs:label "hasBuilding"@en ;
+                <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  https://w3id.org/bot#hasElement
+bot:hasElement rdf:type owl:ObjectProperty ;
+               rdfs:domain bot:Zone ;
+               rdfs:range bot:Element ;
+               owl:propertyChainAxiom ( bot:containsZone
+                                        bot:hasElement
+                                      ) ;
+               rdfs:comment "Links a Zone to an Element that is either contained in, adjacent to or intersecting with the Zone. The intended use of this relationship is not to be stated explicitly, but to be inferred from its sub-properties. It will, for example, allow one to query for all the doors of a building given that they have an adjacency to spaces of the building."@en ;
+               rdfs:label "hasElement"@en .
+
+
+###  https://w3id.org/bot#hasSpace
+bot:hasSpace rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf bot:containsZone ;
+             rdfs:domain bot:Zone ;
+             rdfs:range bot:Space ;
+             rdfs:comment "Relation to spaces contained in a zone. The typical domains of bot:hasSpace are instances of bot:Storey or bot:Building."@en ;
+             rdfs:isDefinedBy bot: ;
+             rdfs:label "hasSpace"@en ;
+             <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+
+###  https://w3id.org/bot#hasStorey
+bot:hasStorey rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf bot:containsZone ;
+              rdfs:domain bot:Zone ;
+              rdfs:range bot:Storey ;
+              rdfs:comment "Relation to storeys contained in a zone. The typical domains of bot:hasStorey are instances of bot:Building."@en ;
+              rdfs:isDefinedBy bot: ;
+              rdfs:label "hasStorey"@en ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" ;
+              <https://schema.org/domainIncludes> bot:Building .
+
+
+###  https://w3id.org/bot#hasSubElement
+bot:hasSubElement rdf:type owl:ObjectProperty ;
+                  rdfs:domain bot:Element ;
+                  rdfs:range bot:Element ;
+                  rdfs:comment "Relation between two building elements, either one element hosting another (e.g. a wall hosts a window) or a subcomposition of a building element into smaller parts (e.g. an air handling unit has as a part a fan)."@en ;
+                  rdfs:label "hasSubElement"@en .
+
+
+###  https://w3id.org/bot#hasZeroPoint
+bot:hasZeroPoint rdf:type owl:ObjectProperty ;
+                 rdfs:domain bot:Site ;
+                 rdfs:comment "Links a bot:Site to an instance that encodes the latitude and longitude of the Zero Point of the building site. This could be an instance of a wgs84:Point. The definition of GIS and geometry is not within the scope of BOT and an appropriate ontology needs to be selected here by the user. The use of this property is potentially ambiguous and it might be removed or revised in future editions of the ontology."@en ;
+                 rdfs:label "hasZeroPoint"@en .
+
+
+###  https://w3id.org/bot#interfaceOf
+bot:interfaceOf rdf:type owl:ObjectProperty ;
+                rdfs:domain bot:Interface ;
+                rdfs:comment "Relationship between an interface and another thing (building zone, element or owl:Thing)"@en ;
+                rdfs:label "interfaceOf"@en .
+
+
+###  https://w3id.org/bot#intersectingElement
+bot:intersectingElement rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf bot:hasElement ;
+                        rdfs:comment "Relation between a Zone and a building Element that intersects it."@en ;
+                        rdfs:label "intersectingElement"@en .
+
+
+###  https://w3id.org/bot#intersectsZone
+bot:intersectsZone rdf:type owl:ObjectProperty ,
+                            owl:SymmetricProperty ;
+                   rdfs:domain bot:Zone ;
+                   rdfs:range bot:Zone ;
+                   rdfs:comment "Relationship between two zones whose 3D extent intersect. For example, a stairwell intersects different storeys."@en ;
+                   rdfs:label "intersectsZone"@en ;
+                   <https://schema.org/domainIncludes> bot:Building ,
+                                                       bot:Site ,
+                                                       bot:Space ,
+                                                       bot:Storey ;
+                   <https://schema.org/rangeIncludes> bot:Building ,
+                                                      bot:Site ,
+                                                      bot:Space ,
+                                                      bot:Storey .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://w3id.org/bam#actualEndTime
+:actualEndTime rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Task ;
+               rdfs:range xsd:dateTime ;
+               rdfs:label "actualEndTime"@en .
+
+
+###  https://w3id.org/bam#capturedAt
+:capturedAt rdf:type owl:DatatypeProperty ;
+            rdfs:domain :DataAsset ;
+            rdfs:range xsd:dateTime ;
+            rdfs:comment "The date and time when the data asset was captured or generated."@en ;
+            rdfs:label "capturedAt"@en .
+
+
+###  https://w3id.org/bam#dataFormat
+:dataFormat rdf:type owl:DatatypeProperty ;
+            rdfs:domain :DataAsset ;
+            rdfs:range xsd:string ;
+            rdfs:comment "The file format or encoding of the data asset, e.g. IFC, LAS, E57, JPEG, CSV."@en ;
+            rdfs:label "dataFormat"@en .
+
+
+###  https://w3id.org/bam#dataURI
+:dataURI rdf:type owl:DatatypeProperty ;
+         rdfs:domain :DataAsset ;
+         rdfs:range xsd:string ;
+         rdfs:comment "A resolvable URI or file path pointing to the stored data asset."@en ;
+         rdfs:label "dataURI"@en .
+
+
+###  https://w3id.org/bam#documentTitle
+:documentTitle rdf:type owl:DatatypeProperty ;
+               rdfs:domain :DocumentBasis ;
+               rdfs:range xsd:string ;
+               rdfs:comment "A human-readable title used to display the document in user interfaces."@en ;
+               rdfs:label "documentTitle"@en .
+
+
+###  https://w3id.org/bam#documentURI
+:documentURI rdf:type owl:DatatypeProperty ;
+             rdfs:domain :DocumentBasis ;
+             rdfs:range xsd:anyURI ;
+             rdfs:comment "A resolvable URI or file path pointing to the document location for human access."@en ;
+             rdfs:label "documentURI"@en .
+
+
+###  https://w3id.org/bam#eventTimestamp
+:eventTimestamp rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Event ;
+                rdfs:range xsd:dateTime ;
+                rdfs:comment "The date and time at which the event occurred."@en ;
+                rdfs:label "eventTimestamp"@en .
+
+
+###  https://w3id.org/bam#hasArea
+:hasArea rdf:type owl:DatatypeProperty ;
+         rdfs:range xsd:decimal ;
+         rdfs:comment "The floor area of a space in square metres."@en ;
+         rdfs:label "hasArea"@en .
+
+
+###  https://w3id.org/bam#hasBuildingHeight
+:hasBuildingHeight rdf:type owl:DatatypeProperty ;
+                   rdfs:domain bot:Building ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:comment "Height of a building is measured as shown in Appendix D, Diagram D4."@en ;
+                   rdfs:label "hasBuildingHeight"@en .
+
+
+###  https://w3id.org/bam#hasCombinedGrossFloorArea
+:hasCombinedGrossFloorArea rdf:type owl:DatatypeProperty ;
+                           rdfs:domain bot:Building ;
+                           rdfs:range xsd:decimal ;
+                           rdfs:comment "Total gross floor area of all storeys in a building, in square metres."@en ;
+                           rdfs:label "hasCombinedGrossFloorArea"@en .
+
+
+###  https://w3id.org/bam#hasCoverageType
+:hasCoverageType rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Alarm ;
+                 rdfs:comment "The spatial coverage mode of the detector, e.g. PointDetector, BeamDetector, AspiratingDetector."@en ;
+                 rdfs:label "hasCoverageType"@en .
+
+
+###  https://w3id.org/bam#hasDetectionType
+:hasDetectionType rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Alarm ;
+                  rdfs:comment "The detection principle of the alarm device, e.g. OpticalSmoke, Ionisation, Heat, MultiSensor, CarbonMonoxide."@en ;
+                  rdfs:label "hasDetectionType"@en .
+
+
+###  https://w3id.org/bam#hasDirectDistance
+:hasDirectDistance rdf:type owl:DatatypeProperty ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:comment "The shortest distance from any point within the floor area to the nearest storey exit, measured within the external enclosures of the building, and ignoring walls, partitions and fittings other than the enclosing walls and partitions to protected stairways."@en ;
+                   rdfs:label "hasDirectDistance"@en .
+
+
+###  https://w3id.org/bam#hasElevation
+:hasElevation rdf:type owl:DatatypeProperty ;
+              rdfs:range xsd:decimal ;
+              rdfs:comment "The vertical height of a storey floor level above a reference datum, in metres."@en ;
+              rdfs:label "hasElevation"@en .
+
+
+###  https://w3id.org/bam#hasExtinguisherAgent
+:hasExtinguisherAgent rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :FireExtinguisher ;
+                      rdfs:comment "The extinguishing agent type, e.g. DryPowder, CO2, WaterMist, WetChemical, Foam."@en ;
+                      rdfs:label "hasExtinguisherAgent"@en .
+
+
+###  https://w3id.org/bam#hasFireClassRating
+:hasFireClassRating rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :FireExtinguisher ;
+                    rdfs:comment "The fire class rating per BS EN 2, e.g. A, B, AB, ABC, AF."@en ;
+                    rdfs:label "hasFireClassRating"@en .
+
+
+###  https://w3id.org/bam#hasFixedAssetValue
+:hasFixedAssetValue rdf:type owl:DatatypeProperty ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:comment "This refers to the total asset value of the space."@en ;
+                    rdfs:label "hasFixedAssetValue"@en .
+
+
+###  https://w3id.org/bam#hasID
+:hasID rdf:type owl:DatatypeProperty ;
+       rdfs:range xsd:string ;
+       rdfs:comment "A unique identifier string for the entity."@en ;
+       rdfs:label "hasID"@en .
+
+
+###  https://w3id.org/bam#hasLength
+:hasLength rdf:type owl:DatatypeProperty ;
+           rdfs:range xsd:decimal ;
+           rdfs:comment "The length dimension of a building element, in metres."@en ;
+           rdfs:label "hasLength"@en .
+
+
+###  https://w3id.org/bam#hasNumberOfStoreys
+:hasNumberOfStoreys rdf:type owl:DatatypeProperty ;
+                    rdfs:domain bot:Building ;
+                    rdfs:range xsd:integer ;
+                    rdfs:comment "Number of storeys excluding basements"@en ;
+                    rdfs:label "hasNumberOfStoreys"@en .
+
+
+###  https://w3id.org/bam#hasREI
+:hasREI rdf:type owl:DatatypeProperty ;
+        rdfs:label "hasREI"@en ;
+        owl:deprecated "" .
+
+
+###  https://w3id.org/bam#hasServiceExpiryDate
+:hasServiceExpiryDate rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Equipment ;
+                      rdfs:comment "The date by which the equipment must be serviced or replaced to remain compliant."@en ;
+                      rdfs:label "hasServiceExpiryDate"@en .
+
+
+###  https://w3id.org/bam#hasStoreyHeight
+:hasStoreyHeight rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:decimal ;
+                 rdfs:comment "The floor-to-floor height of a storey, in metres."@en ;
+                 rdfs:label "hasStoreyHeight"@en .
+
+
+###  https://w3id.org/bam#hasThickness
+:hasThickness rdf:type owl:DatatypeProperty ;
+              rdfs:range xsd:decimal ;
+              rdfs:comment "The thickness dimension of a building element, in metres."@en ;
+              rdfs:label "hasThickness"@en .
+
+
+###  https://w3id.org/bam#hasTopStoreyFloorHeight
+:hasTopStoreyFloorHeight rdf:type owl:DatatypeProperty ;
+                         rdfs:domain bot:Building ;
+                         rdfs:range xsd:decimal ;
+                         rdfs:comment "Height of the floor of the top storey above ground level is measured as shown in Appendix D, Diagram D6."@en ;
+                         rdfs:label "hasTopStoreyFloorHeight"@en .
+
+
+###  https://w3id.org/bam#hasTopStoreyHeight
+:hasTopStoreyHeight rdf:type owl:DatatypeProperty ;
+                    rdfs:domain bot:Building ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:comment "The floor-to-ceiling height of the topmost storey, in metres."@en ;
+                    rdfs:label "hasTopStoreyHeight"@en .
+
+
+###  https://w3id.org/bam#hasTravelDistance
+:hasTravelDistance rdf:type owl:DatatypeProperty ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:comment "(unless otherwise specified, e.g. as in the case of flats) The distance that a person would travel from any point within the floor area to the nearest storey exit, determined by the layout of walls, partitions and fittings."@en ;
+                   rdfs:label "hasTravelDistance"@en .
+
+
+###  https://w3id.org/bam#hasValue
+:hasValue rdf:type owl:DatatypeProperty ;
+          rdfs:range xsd:decimal ;
+          rdfs:comment "The value of a physical object, such as the value of furniture."@en ;
+          rdfs:label "hasValue"@en .
+
+
+###  https://w3id.org/bam#hasVolume
+:hasVolume rdf:type owl:DatatypeProperty ;
+           rdfs:range xsd:decimal ;
+           rdfs:comment "The volume of a space, in cubic metres."@en ;
+           rdfs:label "hasVolume"@en .
+
+
+###  https://w3id.org/bam#hasWallOpeningRatio
+:hasWallOpeningRatio rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :ExternalWall ;
+                     rdfs:range xsd:decimal ;
+                     rdfs:label "hasWallOpeningRatio"@en .
+
+
+###  https://w3id.org/bam#hasWidth
+:hasWidth rdf:type owl:DatatypeProperty ;
+          rdfs:range xsd:decimal ;
+          rdfs:comment "The width dimension of a building element, in metres."@en ;
+          rdfs:label "hasWidth"@en .
+
+
+###  https://w3id.org/bam#isAboveGround
+:isAboveGround rdf:type owl:DatatypeProperty ;
+               rdfs:domain bot:Storey ;
+               rdfs:range xsd:boolean ;
+               rdfs:comment "Determine whether the storey is a basement or above ground."@en ;
+               rdfs:label "isAboveGround"@en .
+
+
+###  https://w3id.org/bam#isDamaged
+:isDamaged rdf:type owl:DatatypeProperty ;
+           rdfs:range xsd:boolean ;
+           rdfs:comment "Boolean indicating whether the element shows visible damage affecting its fire performance."@en ;
+           rdfs:label "isDamaged"@en .
+
+
+###  https://w3id.org/bam#isEnclosed
+:isEnclosed rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:boolean ;
+            rdfs:comment "Boolean indicating whether the element or space is fully enclosed by construction."@en ;
+            rdfs:label "isEnclosed"@en .
+
+
+###  https://w3id.org/bam#isExternal
+:isExternal rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:boolean ;
+            rdfs:comment "Boolean indicating whether the element forms part of the external building envelope."@en ;
+            rdfs:label "isExternal"@en .
+
+
+###  https://w3id.org/bam#isLoadBearing
+:isLoadBearing rdf:type owl:DatatypeProperty ;
+               rdfs:range xsd:boolean ;
+               rdfs:comment "Boolean indicating whether the element carries structural loads."@en ;
+               rdfs:label "isLoadBearing"@en .
+
+
+###  https://w3id.org/bam#isObscured
+:isObscured rdf:type owl:DatatypeProperty ;
+            rdfs:range xsd:boolean ;
+            rdfs:comment "Refers to the state of being obscured."@en ;
+            rdfs:label "isObscured"@en .
+
+
+###  https://w3id.org/bam#plannedEndTime
+:plannedEndTime rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Task ;
+                rdfs:range xsd:dateTime ;
+                rdfs:label "plannedEndTime"@en .
+
+
+###  https://w3id.org/bam#plannedStartTime
+:plannedStartTime rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Task ;
+                  rdfs:range xsd:dateTime ;
+                  rdfs:label "plannedStartTime"@en .
+
+
+###  https://w3id.org/bam#requiresInspection
+:requiresInspection rdf:type owl:DatatypeProperty ;
+                    rdfs:range xsd:boolean ;
+                    rdfs:comment "Must be subject to inspection assignments (e.g., fire safety inspections)."@en ;
+                    rdfs:label "requiresInspection"@en .
+
+
+###  https://w3id.org/bam#stateTimestamp
+:stateTimestamp rdf:type owl:DatatypeProperty ;
+                rdfs:domain :State ;
+                rdfs:range xsd:dateTime ;
+                rdfs:comment "The date and time at which the state was observed or recorded."@en ;
+                rdfs:label "stateTimestamp"@en .
+
+
+###  https://w3id.org/bot#hasSimple3DModel
+bot:hasSimple3DModel rdf:type owl:DatatypeProperty ;
+                     rdfs:comment "Links any bot:Zone or bot:Element to a 3D Model encoded as a literal."@en ;
+                     rdfs:label "hasSimple3DModel"@en ;
+                     <https://schema.org/domainIncludes> bot:Zone .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://w3id.org/bam#Accommodation
+:Accommodation rdf:type owl:Class ;
+               rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Agent
+:Agent rdf:type owl:Class ;
+       rdfs:comment "A person, group, or company authorized to act on behalf of the client (owner, developer, or investor) to manage, supervise, or oversee a construction project or the ongoing operations of a building."@en ;
+       rdfs:label "Agent"@en .
+
+
+###  https://w3id.org/bam#Alarm
+:Alarm rdf:type owl:Class ;
+       rdfs:subClassOf :Equipment ;
+       rdfs:comment "An alarm in a building is a system designed to alert occupants to a potential danger, such as fire or intrusion, and consists of detectors, warning devices, and control equipment."@en ;
+       rdfs:label "Alarm"@en .
+
+
+###  https://w3id.org/bam#ApplianceVentilationDuct
+:ApplianceVentilationDuct rdf:type owl:Class ;
+                          rdfs:subClassOf :HVACSystem ;
+                          rdfs:comment "A duct to deliver combustion air to a gas appliance."@en ;
+                          rdfs:label "ApplianceVentilationDuct"@en .
+
+
+###  https://w3id.org/bam#AssemblyPlace
+:AssemblyPlace rdf:type owl:Class ;
+               rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#AssessmentBasis
+:AssessmentBasis rdf:type owl:Class ;
+                 rdfs:comment "A bundle of evidence items used to justify a fire compliance evaluation or risk assessment. It groups observed site evidence, regulatory sources, and supporting external documents for traceability and explanation."@en ;
+                 rdfs:label "AssessmentBasis"@en .
+
+
+###  https://w3id.org/bam#AssessmentTask
+:AssessmentTask rdf:type owl:Class ;
+                rdfs:subClassOf :Task ;
+                rdfs:label "AssessmentTask"@en .
+
+
+###  https://w3id.org/bam#AtriumSpace
+:AtriumSpace rdf:type owl:Class ;
+             rdfs:subClassOf bot:Space ;
+             rdfs:comment """A continuous space that passes through one or more structural floors within a building, not necessarily vertically.
+Enclosed lift wells, enclosed escalator wells, building services ducts and stairs are not classified as atria."""@en ;
+             rdfs:label "AtriumSpace"@en .
+
+
+###  https://w3id.org/bam#Auditorium
+:Auditorium rdf:type owl:Class ;
+            rdfs:subClassOf :SpaceUsage .
+
+
+###  https://w3id.org/bam#BalconySpace
+:BalconySpace rdf:type owl:Class ;
+              rdfs:subClassOf bot:Space ;
+              rdfs:comment "A balcony is a platform projecting from the wall of a building, enclosed by a balustrade or railing, and accessed from an upper-level room."@en ;
+              rdfs:label "BalconySpace"@en .
+
+
+###  https://w3id.org/bam#BasementStorey
+:BasementStorey rdf:type owl:Class ;
+                rdfs:subClassOf bot:Storey ;
+                rdfs:comment "A storey with a floor that, at some point, is more than 1200mm below the highest level of ground beside the outside walls. (However, see Appendix B, paragraph B26c, for situations where the storey is considered to be a basement only because of a sloping site.)"@en ;
+                rdfs:label "BasementStorey"@en .
+
+
+###  https://w3id.org/bam#Bathroom
+:Bathroom rdf:type owl:Class ;
+          rdfs:subClassOf :SpaceUsage ;
+          owl:disjointWith :HabitableRoom .
+
+
+###  https://w3id.org/bam#Beam
+:Beam rdf:type owl:Class ;
+      rdfs:subClassOf :StructuralElement ;
+      rdfs:comment "A beam is a horizontal structural element that carries loads perpendicular to its length, transferring weight from a roof, floor, or ceiling to vertical supports like columns or walls."@en ;
+      rdfs:label "Beam"@en .
+
+
+###  https://w3id.org/bam#BoardingHouse
+:BoardingHouse rdf:type owl:Class ;
+               rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#BoilerRoom
+:BoilerRoom rdf:type owl:Class ;
+            rdfs:subClassOf :PlaceOfSpecialHazard ;
+            rdfs:comment "A boiler room is a dedicated space in a building that houses essential mechanical equipment for services like heating, hot water, and electricity." ;
+            rdfs:label "BoilerRoom"@en .
+
+
+###  https://w3id.org/bam#Boundary
+:Boundary rdf:type owl:Class ;
+          rdfs:subClassOf bot:Zone ;
+          rdfs:comment "The boundary of the land that belongs to a building, or, where the land abuts a road, railway, canal or river, the centre line of that road, railway, canal or river."@en ;
+          rdfs:label "Boundary"@en .
+
+
+###  https://w3id.org/bam#BuildingContent
+:BuildingContent rdf:type owl:Class ;
+                 rdfs:subClassOf :PhysicalObject ;
+                 rdfs:comment "Furniture, equipment, inventory - not part of building structure."@en ;
+                 rdfs:label "BuildingContent"@en .
+
+
+###  https://w3id.org/bam#BuildingSystem
+:BuildingSystem rdf:type owl:Class ;
+                rdfs:comment "A building system refers to the interconnected, functional components of a building, including its mechanical, and electrical infrastructure."@en ;
+                rdfs:label "BuildingSystem"@en .
+
+
+###  https://w3id.org/bam#CarParking
+:CarParking rdf:type owl:Class ;
+            rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#CavitySpace
+:CavitySpace rdf:type owl:Class ;
+             rdfs:subClassOf bot:Space ;
+             rdfs:comment "A space enclosed by elements of a building (including a suspended ceiling) or contained within an element, but that is not a room, cupboard, circulation space, protected shaft, or space within a flue, chute, duct, pipe or conduit."@en ;
+             rdfs:label "CavitySpace"@en .
+
+
+###  https://w3id.org/bam#Ceiling
+:Ceiling rdf:type owl:Class ;
+         rdfs:subClassOf :FabricElement ;
+         rdfs:comment """Part of a building that encloses a room, protected shaft or circulation space and is exposed overhead.
+The soffit of a rooflight, but not the frame, is included as part of the surface of the ceiling. An upstand below a rooflight is considered as a wall."""@en ;
+         rdfs:label "Ceiling"@en .
+
+
+###  https://w3id.org/bam#Circuit
+:Circuit rdf:type owl:Class ;
+         rdfs:subClassOf :ElectricalSystem ;
+         rdfs:label "Circuit"@en .
+
+
+###  https://w3id.org/bam#CirculationUsage
+:CirculationUsage rdf:type owl:Class ;
+                  rdfs:subClassOf :SpaceUsage ;
+                  rdfs:comment "A space usage for areas primarily serving pedestrian movement, such as corridors, halls, and lobbies."@en ;
+                  rdfs:label "CirculationUsage"@en .
+
+
+###  https://w3id.org/bam#Cladding
+:Cladding rdf:type owl:Class ;
+          rdfs:subClassOf :ExternalWall ;
+          rdfs:comment "Cladding is an external layer applied to a building's structure to provide weather protection, thermal insulation, and improved aesthetics."@en ;
+          rdfs:label "Cladding"@en .
+
+
+###  https://w3id.org/bam#Classification
+:Classification rdf:type owl:Class ;
+                rdfs:comment "Classify buildings or compartments according to their intended use, construction type, or structural risk to ensure safety, regulatory compliance, and facilitate communication between professionals such as planners, insurers, and contractors."@en ;
+                rdfs:label "Classification"@en .
+
+
+###  https://w3id.org/bam#Closing
+:Closing rdf:type owl:Class ;
+         rdfs:subClassOf :FabricElement ;
+         rdfs:comment "A fabric element category for components that close openings in the building envelope or internal partitions, including doors, windows, and dampers."@en ;
+         rdfs:label "Closing"@en .
+
+
+###  https://w3id.org/bam#Column
+:Column rdf:type owl:Class ;
+        rdfs:subClassOf :StructuralElement ;
+        rdfs:comment "A column is a vertical structural element in a building that supports loads from above and transfers them down to the foundation."@en ;
+        rdfs:label "Column"@en .
+
+
+###  https://w3id.org/bam#CommercialPlace
+:CommercialPlace rdf:type owl:Class ;
+                 rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Completed
+:Completed rdf:type owl:Class ;
+           rdfs:subClassOf :TaskStatus .
+
+
+###  https://w3id.org/bam#ComplianceCheckTask
+:ComplianceCheckTask rdf:type owl:Class ;
+                     rdfs:subClassOf :Task ;
+                     rdfs:comment "Task generated by LLM/Rule engine to verify regulation compliance."@en ;
+                     rdfs:label "ComplianceCheckTask"@en .
+
+
+###  https://w3id.org/bam#Controller
+:Controller rdf:type owl:Class ;
+            rdfs:subClassOf :Equipment ;
+            rdfs:comment "In buildings, a \"controller\" is the \"brain\" of an automated system, receiving data from sensors and sending commands to devices like HVAC, lighting, and alarms to ensure comfort and efficiency."@en ;
+            rdfs:label "Controller"@en .
+
+
+###  https://w3id.org/bam#Corridor
+:Corridor rdf:type owl:Class ;
+          rdfs:subClassOf :CirculationUsage ;
+          rdfs:comment "A long, narrow passageway in a building that connects different rooms or areas, serving as a primary horizontal circulation route."@en ;
+          rdfs:label "Corridor"@en .
+
+
+###  https://w3id.org/bam#Curtain
+:Curtain rdf:type owl:Class ;
+         rdfs:subClassOf :FabricElement ;
+         rdfs:comment "Part of a solar shading device which is set in motion by the operating system and fulfils the purpose of a blind, awning or shutter."@en ;
+         rdfs:label "Curtain"@en .
+
+
+###  https://w3id.org/bam#DataAsset
+:DataAsset rdf:type owl:Class ;
+           rdfs:comment "A digital resource that records, represents, or monitors a building or its components. DataAsset is the top-level class for the Data Provenance module, covering sensor streams, spatial captures, and digital models."@en ;
+           rdfs:label "DataAsset"@en .
+
+
+###  https://w3id.org/bam#DetentionHouse
+:DetentionHouse rdf:type owl:Class ;
+                rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#DigitalModel
+:DigitalModel rdf:type owl:Class ;
+              rdfs:subClassOf :DataAsset ;
+              rdfs:comment "A digital representation of a building's geometry, topology, or systems, such as a BIM model (IFC), a CAD drawing, or a 3D mesh derived from survey data."@en ;
+              rdfs:label "DigitalModel"@en .
+
+
+###  https://w3id.org/bam#DocumentBasis
+:DocumentBasis rdf:type owl:Class ;
+               rdfs:subClassOf :AssessmentBasis ;
+               rdfs:comment "An external file or record that supports assessment or documentation, such as product data sheets, installation manuals, certificates, drawings, or inspection reports. It is linked for human access and traceability and does not directly participate in logical inference unless explicitly modelled."@en ;
+               rdfs:label "DocumentBasis"@en .
+
+
+###  https://w3id.org/bam#Doorset
+:Doorset rdf:type owl:Class ;
+         rdfs:subClassOf :Closing ;
+         rdfs:comment "A doorset is a complete, integrated door system consisting of the door leaf, frame, and all necessary hardware like hinges, seals, and closers, sold as a single unit from one source."@en ;
+         rdfs:label "Doorset"@en .
+
+
+###  https://w3id.org/bam#DuctSpace
+:DuctSpace rdf:type owl:Class ;
+           rdfs:subClassOf bot:Space ;
+           rdfs:comment "A duct space is a designated area or channel within a building that houses the systems for conveying air, cables, and other utilities."@en ;
+           rdfs:label "DuctSpace"@en .
+
+
+###  https://w3id.org/bam#Dwellinghouse
+:Dwellinghouse rdf:type owl:Class ;
+               rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#ElectricalSystem
+:ElectricalSystem rdf:type owl:Class ;
+                  rdfs:subClassOf :BuildingSystem ;
+                  rdfs:comment "An electrical system in a building is a network of wiring, equipment, and protective devices that safely distributes power from its entry point to all the loads, such as lights, outlets, and appliances, within the structure."@en ;
+                  rdfs:label "ElectricalSystem"@en .
+
+
+###  https://w3id.org/bam#EmergencyLighting
+:EmergencyLighting rdf:type owl:Class ;
+                   rdfs:subClassOf :ElectricalSystem ;
+                   rdfs:comment "Lighting for use when the power supply to the normal lighting fails."@en ;
+                   rdfs:label "EmergencyLighting"@en .
+
+
+###  https://w3id.org/bam#EngineRoom
+:EngineRoom rdf:type owl:Class ;
+            rdfs:subClassOf :PlaceOfSpecialHazard ;
+            rdfs:comment "In buildings, an \"engine room\" typically refers to the central location for the mechanical and electrical systems that keep the building running, such as HVAC, boilers, generators, and pumps."@en ;
+            rdfs:label "EngineRoom"@en .
+
+
+###  https://w3id.org/bam#EntertainmentPlace
+:EntertainmentPlace rdf:type owl:Class ;
+                    rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#EntranceHall
+:EntranceHall rdf:type owl:Class ;
+              rdfs:subClassOf :CirculationUsage ;
+              rdfs:comment "A hall or space inside a dwelling that connects the entrance door to the rooms."@en ;
+              rdfs:label "EntranceHall"@en .
+
+
+###  https://w3id.org/bam#Equipment
+:Equipment rdf:type owl:Class ;
+           rdfs:subClassOf :PhysicalObject ,
+                           bot:Element ;
+           rdfs:comment "Independently identifiable. Maintainable/inspectable. Usually has a model/serial number. Replaceable physical device or apparatus."@en ;
+           rdfs:label "Equipment"@en .
+
+
+###  https://w3id.org/bam#EscapeLighting
+:EscapeLighting rdf:type owl:Class ;
+                rdfs:subClassOf :EmergencyLighting ;
+                rdfs:comment "The part of the emergency lighting that is provided to ensure that the escape route is illuminated at all material times."@en ;
+                rdfs:label "EscapeLighting"@en .
+
+
+###  https://w3id.org/bam#EvacuationLift
+:EvacuationLift rdf:type owl:Class ;
+                rdfs:subClassOf :LiftSystem ;
+                rdfs:comment "A lift that may be used to evacuate people in a fire."@en ;
+                rdfs:label "EvacuationLift"@en .
+
+
+###  https://w3id.org/bam#Event
+:Event rdf:type owl:Class ;
+       rdfs:comment "An occurrence that changes the state of an asset."@en ;
+       rdfs:label "Event"@en .
+
+
+###  https://w3id.org/bam#EvidenceItem
+:EvidenceItem rdf:type owl:Class ;
+              rdfs:subClassOf :AssessmentBasis ;
+              rdfs:comment "A single piece of evidence that supports an assessment. It may be an observation, a regulatory reference, or an external document. Evidence items are linkable, traceable, and can be attached to specific assets, spaces, or checks."@en ;
+              rdfs:label "EvidenceItem"@en .
+
+
+###  https://w3id.org/bam#ExternalWall
+:ExternalWall rdf:type owl:Class ;
+              rdfs:subClassOf :Wall ;
+              rdfs:comment """The external wall of a building includes all of the following.
+• Anything located within any space forming part of the wall.
+• Any decoration or other finish applied to any external (but not internal) surface forming part of the wall.
+• Any windows and doors in the wall.
+• Any part of a roof pitched at an angle of more than 70 degrees to the horizontal if that part of the roof adjoins a space within the building to which persons have access, but not access only for the purpose of carrying out repairs or maintenance."""@en ;
+              rdfs:label "ExternalWall"@en .
+
+
+###  https://w3id.org/bam#ExternalWallDoor
+:ExternalWallDoor rdf:type owl:Class ;
+                  rdfs:subClassOf :Doorset ;
+                  rdfs:comment "An external wall door is a door that is part of a building's exterior wall, providing an entrance and exit to the building."@en ;
+                  rdfs:label "ExternalWallDoor"@en .
+
+
+###  https://w3id.org/bam#ExternalWallWindow
+:ExternalWallWindow rdf:type owl:Class ;
+                    rdfs:subClassOf :Window ;
+                    rdfs:comment "An external wall window is a window that is part of a building's exterior wall, which acts as the outer boundary separating the interior from the outside environment."@en ;
+                    rdfs:label "ExternalWallWindow"@en .
+
+
+###  https://w3id.org/bam#FabricElement
+:FabricElement rdf:type owl:Class ;
+               rdfs:subClassOf :PhysicalObject ,
+                               bot:Element ;
+               rdfs:comment "Building structural components. Aligning the BuildingElement with the BOT."@en ;
+               rdfs:label "FabricElement"@en .
+
+
+###  https://w3id.org/bam#Factory
+:Factory rdf:type owl:Class ;
+         rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Finishes
+:Finishes rdf:type owl:Class ;
+          rdfs:subClassOf :BuildingContent ;
+          rdfs:comment "Finishes are the final surface treatments and decorative elements applied to a building's interior and exterior."@en ;
+          rdfs:label "Finishes"@en .
+
+
+###  https://w3id.org/bam#FireExtinguisher
+:FireExtinguisher rdf:type owl:Class ;
+                  rdfs:subClassOf :Equipment ;
+                  rdfs:comment "A portable or fixed manually-operated device containing an extinguishing agent that can be expelled for the purpose of suppressing or extinguishing a fire. Fire extinguishers are classified by their agent type (water, foam, CO2, dry powder, wet chemical) and by the fire classes they are rated to address."@en ;
+                  rdfs:label "FireExtinguisher"@en .
+
+
+###  https://w3id.org/bam#FireFightingLift
+:FireFightingLift rdf:type owl:Class ;
+                  rdfs:subClassOf :LiftSystem ;
+                  rdfs:comment "A lift with additional protection and with controls that enable it to be used by the fire and rescue service when fighting a fire."@en ;
+                  rdfs:label "FireFightingLift"@en .
+
+
+###  https://w3id.org/bam#Flat
+:Flat rdf:type owl:Class ;
+      rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Floor
+:Floor rdf:type owl:Class ;
+       rdfs:subClassOf :FabricElement ;
+       rdfs:comment "A floor is the horizontal surface in a building that forms the base of a room, providing structural support for occupants, furniture, and the building's own weight."@en ;
+       rdfs:label "Floor"@en .
+
+
+###  https://w3id.org/bam#FloorSlab
+:FloorSlab rdf:type owl:Class ;
+           rdfs:subClassOf :Floor ,
+                           :Slab ;
+           rdfs:comment "A horizontal structural slab forming an intermediate or ground-level floor, transferring occupancy and dead loads to the supporting structure."@en ;
+           rdfs:label "FloorSlab"@en .
+
+
+###  https://w3id.org/bam#Foyer
+:Foyer rdf:type owl:Class ;
+       rdfs:subClassOf :CirculationUsage ;
+       rdfs:comment "The large area where people meet or wait just inside the main doors of a building."@en ;
+       rdfs:label "Foyer"@en .
+
+
+###  https://w3id.org/bam#FuelStorage
+:FuelStorage rdf:type owl:Class ;
+             rdfs:subClassOf :PlaceOfSpecialHazard ;
+             rdfs:comment "Fuel storage in buildings refers to the secure and safe storage of various fuels, such as oil, petrol, or wood, for heating, cooking, or other purposes."@en ;
+             rdfs:label "FuelStorage"@en .
+
+
+###  https://w3id.org/bam#Furnishings
+:Furnishings rdf:type owl:Class ;
+             rdfs:subClassOf :BuildingContent ;
+             rdfs:comment "Movable items that make a space habitable and decorative."@en ;
+             rdfs:label "Furnishings"@en .
+
+
+###  https://w3id.org/bam#Gallery
+:Gallery rdf:type owl:Class ;
+         rdfs:subClassOf :SpaceUsage .
+
+
+###  https://w3id.org/bam#GroundAndAboveStorey
+:GroundAndAboveStorey rdf:type owl:Class ;
+                      rdfs:subClassOf bot:Storey ;
+                      rdfs:comment "A storey at or above ground level, defined by isAboveGround = true."@en ;
+                      rdfs:label "GroundAndAboveStorey"@en .
+
+
+###  https://w3id.org/bam#HVACSystem
+:HVACSystem rdf:type owl:Class ;
+            rdfs:subClassOf :BuildingSystem ;
+            rdfs:comment "An HVAC system is a building's climate control system for heating, ventilation, and air conditioning."@en ;
+            rdfs:label "HVACSystem"@en .
+
+
+###  https://w3id.org/bam#HabitableRoom
+:HabitableRoom rdf:type owl:Class ;
+               rdfs:subClassOf :SpaceUsage .
+
+
+###  https://w3id.org/bam#Hall
+:Hall rdf:type owl:Class ;
+      rdfs:subClassOf :CirculationUsage ;
+      rdfs:comment "A \"hall\" in a building can refer to a large, central room or a long, narrow passageway."@en ;
+      rdfs:label "Hall"@en .
+
+
+###  https://w3id.org/bam#HallOfResidence
+:HallOfResidence rdf:type owl:Class ;
+                 rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Hospital
+:Hospital rdf:type owl:Class ;
+          rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Hostel
+:Hostel rdf:type owl:Class ;
+        rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Hotel
+:Hotel rdf:type owl:Class ;
+       rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#InProgress
+:InProgress rdf:type owl:Class ;
+            rdfs:subClassOf :TaskStatus .
+
+
+###  https://w3id.org/bam#InspectionTask
+:InspectionTask rdf:type owl:Class ;
+                rdfs:subClassOf :Task ;
+                rdfs:label "InspectionTask"@en .
+
+
+###  https://w3id.org/bam#Kitchen
+:Kitchen rdf:type owl:Class ;
+         rdfs:subClassOf :SpaceUsage .
+
+
+###  https://w3id.org/bam#LiftShaft
+:LiftShaft rdf:type owl:Class ;
+           rdfs:subClassOf :ShaftSpace ;
+           rdfs:comment "A lift shaft is a vertical passageway in a building where an elevator travels between floors."@en ;
+           rdfs:label "LiftShaft"@en .
+
+
+###  https://w3id.org/bam#LiftSystem
+:LiftSystem rdf:type owl:Class ;
+            rdfs:subClassOf :VerticalTransportSystem ;
+            rdfs:comment "A mechanised vertical transport installation for moving people or goods between storeys of a building."@en ;
+            rdfs:label "LiftSystem"@en .
+
+
+###  https://w3id.org/bam#Lobby
+:Lobby rdf:type owl:Class ;
+       rdfs:subClassOf :CirculationUsage ;
+       rdfs:comment "A lobby is the large, open space at the main entrance of a building that serves as an entry hall, gathering area, and passageway."@en ;
+       rdfs:label "Lobby"@en .
+
+
+###  https://w3id.org/bam#MaintenanceTask
+:MaintenanceTask rdf:type owl:Class ;
+                 rdfs:subClassOf :Task ;
+                 rdfs:label "MaintenanceTask"@en .
+
+
+###  https://w3id.org/bam#MultiStoreyBuilding
+:MultiStoreyBuilding rdf:type owl:Class ;
+                     rdfs:subClassOf bot:Building ;
+                     rdfs:comment """The building is regarded as a multi-storey building if both of the following apply.
+• There is more than one gallery.
+• The total aggregate area of all the galleries in one space is more than half the floor area of that space."""@en ;
+                     rdfs:label "MultiStoreyBuilding"@en .
+
+
+###  https://w3id.org/bam#NavigationTask
+:NavigationTask rdf:type owl:Class ;
+                rdfs:subClassOf :Task ;
+                rdfs:label "NavigationTask"@en .
+
+
+###  https://w3id.org/bam#Office
+:Office rdf:type owl:Class ;
+        rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Opening
+:Opening rdf:type owl:Class ;
+         rdfs:subClassOf :FabricElement ;
+         rdfs:comment "Refers to any intentional void in walls, floors, or ceilings for access, light, air, or services, such as doors, windows, ducts, or stairwells."@en ;
+         rdfs:label "Opening"@en .
+
+
+###  https://w3id.org/bam#Pending
+:Pending rdf:type owl:Class ;
+         rdfs:subClassOf :TaskStatus .
+
+
+###  https://w3id.org/bam#Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf :Agent ;
+        rdfs:comment "A \"person agent\" is typically an individual (or company) authorized to act on behalf of the building owner (landlord or freeholder) to manage and maintain the property. This role is commonly known as a Managing Agent or Property Manager."@en ;
+        rdfs:label "Person"@en .
+
+
+###  https://w3id.org/bam#PhysicalObject
+:PhysicalObject rdf:type owl:Class ;
+                rdfs:comment "Anything that exists in reality and can be located."@en ;
+                rdfs:label "PhysicalObject"@en .
+
+
+###  https://w3id.org/bam#PipingSystem
+:PipingSystem rdf:type owl:Class ;
+              rdfs:subClassOf :BuildingSystem ;
+              rdfs:comment "Includes pipe fittings and accessories. The definition of ‘pipe’ excludes a flue pipe and a pipe used for ventilating purposes, other than a ventilating pipe for an above-ground drainage system."@en ;
+              rdfs:label "PipingSystem"@en .
+
+
+###  https://w3id.org/bam#PlaceOfSpecialHazard
+:PlaceOfSpecialHazard rdf:type owl:Class ;
+                      rdfs:subClassOf :SpaceUsage ;
+                      rdfs:comment """A room such as any of the following.
+• Oil-filled transformer room.
+• Switch gear room.
+• Boiler room.
+• Storage space for fuel or other highly flammable substance(s).
+• Room that houses a fixed internal combustion engine."""@en ;
+                      rdfs:label "PlaceOfSpecialHazard"@en .
+
+
+###  https://w3id.org/bam#PointCloud
+:PointCloud rdf:type owl:Class ;
+            rdfs:subClassOf :DataAsset ;
+            rdfs:comment "A set of 3D data points representing the external or internal surfaces of a building, typically generated by laser scanning (LiDAR) or photogrammetry."@en ;
+            rdfs:label "PointCloud"@en .
+
+
+###  https://w3id.org/bam#Railing
+:Railing rdf:type owl:Class ;
+         rdfs:subClassOf :FabricElement ;
+         rdfs:comment "A railing refers to a protective barrier or fence, usually made of metal (such as wrought or cast iron, steel, or aluminium), timber, or plastic, designed to provide safety and support."@en ;
+         rdfs:label "Railing"@en .
+
+
+###  https://w3id.org/bam#RegulatorySource
+:RegulatorySource rdf:type owl:Class ;
+                  rdfs:subClassOf :AssessmentBasis ;
+                  rdfs:comment "A referenced regulatory or standards document used as the normative basis for a check or requirement, such as Approved Document B, BDM02, or related standards. It provides the requirement context and should be versioned where possible."@en ;
+                  rdfs:label "RegulatorySource"@en .
+
+
+###  https://w3id.org/bam#RelevantBoundary
+:RelevantBoundary rdf:type owl:Class ;
+                  rdfs:subClassOf :Boundary ;
+                  rdfs:comment "The boundary or notional boundary that one side of the building faces and/or coincides with, and that is parallel or at an angle of a maximum of 80 degrees to that side of the building."@en ;
+                  rdfs:label "RelevantBoundary"@en .
+
+
+###  https://w3id.org/bam#ResidentialCollege
+:ResidentialCollege rdf:type owl:Class ;
+                    rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Robot
+:Robot rdf:type owl:Class ;
+       rdfs:subClassOf :Agent ;
+       rdfs:comment "A robot agent is an autonomous or semi-autonomous machine, equipped with advanced sensors, software, and artificial intelligence (AI), that performs tasks like inspection, cleaning, security, and minor repairs within a building or facility environment."@en ;
+       rdfs:label "Robot"@en .
+
+
+###  https://w3id.org/bam#Roof
+:Roof rdf:type owl:Class ;
+      rdfs:subClassOf :FabricElement ;
+      rdfs:comment "A roof is the top covering of a building that provides protection from the elements like rain, sun, snow, and wind."@en ;
+      rdfs:label "Roof"@en .
+
+
+###  https://w3id.org/bam#RoofSlab
+:RoofSlab rdf:type owl:Class ;
+          rdfs:subClassOf :Roof ,
+                          :Slab ;
+          rdfs:comment "A horizontal structural slab forming the topmost floor of a building, directly supporting the roof covering and transferring loads to walls or columns."@en ;
+          rdfs:label "RoofSlab"@en .
+
+
+###  https://w3id.org/bam#RoofSpace
+:RoofSpace rdf:type owl:Class ;
+           rdfs:subClassOf bot:Space ;
+           rdfs:comment "A roof space is the area inside a building between the ceiling of the top floor and the underside of the roof."@en ;
+           rdfs:label "RoofSpace"@en .
+
+
+###  https://w3id.org/bam#Rooflight
+:Rooflight rdf:type owl:Class ;
+           rdfs:subClassOf :Equipment ;
+           rdfs:comment "A dome light, lantern light, ridge light."@en ;
+           rdfs:label "Rooflight"@en .
+
+
+###  https://w3id.org/bam#RooflightOpening
+:RooflightOpening rdf:type owl:Class ;
+                  rdfs:subClassOf :Closing ;
+                  rdfs:comment "A skylight, glazed barrel vault or other element to admit daylight through a roof."@en ;
+                  rdfs:label "RooflightOpening"@en .
+
+
+###  https://w3id.org/bam#RoomSpace
+:RoomSpace rdf:type owl:Class ;
+           rdfs:subClassOf bot:Space ;
+           rdfs:comment "An enclosed space within a building that is not used solely as a circulation space. The term includes not only conventional rooms, but also cupboards that are not fittings and large spaces such as warehouses and auditoria. The term does not include cavities such as ducts, ceiling cavities and roof spaces."@en ;
+           rdfs:label "RoomSpace"@en .
+
+
+###  https://w3id.org/bam#School
+:School rdf:type owl:Class ;
+        rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#SelfClosingDevice
+:SelfClosingDevice rdf:type owl:Class ;
+                   rdfs:subClassOf :Closing ;
+                   rdfs:comment """A device that closes a door, when open at any angle, against a door frame.
+NOTE: If the door is in a cavity barrier, rising butt hinges (which are different from the self-closing device mentioned above) are acceptable."""@en ;
+                   rdfs:label "SelfClosingDevice"@en .
+
+
+###  https://w3id.org/bam#Sensor
+:Sensor rdf:type owl:Class ;
+        rdfs:subClassOf :Equipment ;
+        rdfs:comment "A sensor in a building is a device that detects environmental changes and sends data to a control system to manage building functions like lighting, HVAC, and safety."@en ;
+        rdfs:label "Sensor"@en .
+
+
+###  https://w3id.org/bam#ServiceShaft
+:ServiceShaft rdf:type owl:Class ;
+              rdfs:subClassOf :ShaftSpace ;
+              rdfs:comment "A service shaft is a vertical passage in a building that houses pipes, cables, and ducts for essential building systems like water, electricity, and ventilation."@en ;
+              rdfs:label "ServiceShaft"@en .
+
+
+###  https://w3id.org/bam#ServiceUsage
+:ServiceUsage rdf:type owl:Class ;
+              rdfs:subClassOf :SpaceUsage ;
+              rdfs:comment "A space usage for rooms primarily housing building services equipment and infrastructure."@en ;
+              rdfs:label "ServiceUsage"@en .
+
+
+###  https://w3id.org/bam#ShaftSpace
+:ShaftSpace rdf:type owl:Class ;
+            rdfs:subClassOf bot:Space ;
+            rdfs:comment "A smaller, enclosed vertical space extending through multiple floors used for specific building services, such as elevator hoistways, enclosed stairwells, or ducts for plumbing, electrical, or air-conditioning equipment."@en ;
+            rdfs:label "ShaftSpace"@en .
+
+
+###  https://w3id.org/bam#ShelteredHousing
+:ShelteredHousing rdf:type owl:Class ;
+                  rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#Shop
+:Shop rdf:type owl:Class ;
+      rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#SingleStoreyBuilding
+:SingleStoreyBuilding rdf:type owl:Class ;
+                      rdfs:subClassOf bot:Building ;
+                      rdfs:comment "A building that consists of a ground storey only. Basements are not counted as storeys in a building (see Appendix D). A separated part that consists of a ground storey only, with a roof to which access is only provided for repair or maintenance, may be treated as a single storey building."@en ;
+                      rdfs:label "SingleStoreyBuilding"@en .
+
+
+###  https://w3id.org/bam#SiteImage
+:SiteImage rdf:type owl:Class ;
+           rdfs:subClassOf :DataAsset ;
+           rdfs:comment "A photographic or video record of a building, space, or element, captured during inspection, survey, or routine monitoring."@en ;
+           rdfs:label "SiteImage"@en .
+
+
+###  https://w3id.org/bam#Slab
+:Slab rdf:type owl:Class ;
+      rdfs:subClassOf :StructuralElement ;
+      rdfs:comment "A slab is the thick, structural concrete element (like reinforced concrete) forming a building's horizontal plane"@en ;
+      rdfs:label "Slab"@en .
+
+
+###  https://w3id.org/bam#Software
+:Software rdf:type owl:Class ;
+          rdfs:subClassOf :Agent ;
+          rdfs:comment "A software agent that performs automated building management tasks, such as a building management system (BMS), analytics engine, or compliance checking service."@en ;
+          rdfs:label "Software"@en .
+
+
+###  https://w3id.org/bam#SolarShadingDevice
+:SolarShadingDevice rdf:type owl:Class ;
+                    rdfs:subClassOf :SpecifiedAttachment ;
+                    rdfs:comment "A device attached to the external surface of an external wall for reducing heat gain within a building by shading or deflecting sunlight."@en ;
+                    rdfs:label "SolarShadingDevice"@en .
+
+
+###  https://w3id.org/bam#SpaceUsage
+:SpaceUsage rdf:type owl:Class ;
+            rdfs:subClassOf :UsageType ;
+            rdfs:comment "Describe the uses of the space."@en ;
+            rdfs:label "SpaceUsage"@en .
+
+
+###  https://w3id.org/bam#SpatialCapture
+:SpatialCapture rdf:type owl:Class ;
+                rdfs:subClassOf :DataAsset ;
+                rdfs:comment "A dataset produced by surveying or scanning the physical building, capturing its geometric or visual state at a point in time. Includes point clouds, photogrammetry outputs, and site photographs."@en ;
+                rdfs:label "SpatialCapture"@en .
+
+
+###  https://w3id.org/bam#SpecifiedAttachment
+:SpecifiedAttachment rdf:type owl:Class ;
+                     rdfs:subClassOf :FabricElement ;
+                     rdfs:comment """Includes any of the following.
+• A balcony attached to an external wall.
+• A device for reducing heat gain within a building by deflecting sunlight which is attached to an external wall."""@en ;
+                     rdfs:label "SpecifiedAttachment"@en .
+
+
+###  https://w3id.org/bam#Stair
+:Stair rdf:type owl:Class ;
+       rdfs:subClassOf :FabricElement ;
+       rdfs:comment "a stairway (or staircase) is a series of steps connecting different levels in a building, serving as a pedestrian route."@en ;
+       rdfs:label "Stair"@en .
+
+
+###  https://w3id.org/bam#StairFlight
+:StairFlight rdf:type owl:Class ;
+             rdfs:subClassOf :FabricElement ;
+             rdfs:comment "A stair flight (or simply \"flight\") refers to an uninterrupted, continuous sequence of stairs (steps/risers) that connect two levels, floors, or intermediate landings."@en ;
+             rdfs:label "StairFlight"@en .
+
+
+###  https://w3id.org/bam#StairSpace
+:StairSpace rdf:type owl:Class ;
+            rdfs:subClassOf bot:Space ;
+            rdfs:comment "A stairway space, also called a stairwell, is the vertical compartment in a building that contains a flight of stairs and the associated landings, hallways, or other areas needed to move between floors."@en ;
+            rdfs:label "StairSpace"@en .
+
+
+###  https://w3id.org/bam#State
+:State rdf:type owl:Class ;
+       rdfs:comment "A snapshot of the dynamic condition of a physical object or system at a given point in time. States may be operational, degraded, impaired, or offline."@en ;
+       rdfs:label "State"@en .
+
+
+###  https://w3id.org/bam#Storage
+:Storage rdf:type owl:Class ;
+         rdfs:subClassOf :UtilizationPlanning .
+
+
+###  https://w3id.org/bam#StructuralElement
+:StructuralElement rdf:type owl:Class ;
+                   rdfs:subClassOf :FabricElement ;
+                   rdfs:comment "A structural element is a component of a building that is essential for its stability and for transferring loads to the ground, such as foundations, beams, columns, and load-bearing walls."@en ;
+                   rdfs:label "StructuralElement"@en .
+
+
+###  https://w3id.org/bam#SwitchGearRoom
+:SwitchGearRoom rdf:type owl:Class ;
+                rdfs:subClassOf :PlaceOfSpecialHazard ;
+                rdfs:comment "A switchgear room in a building is a dedicated space that houses electrical equipment used to control, protect, and isolate the building's electrical system, such as circuit breakers, switches, and fuses."@en ;
+                rdfs:label "SwitchGearRoom"@en .
+
+
+###  https://w3id.org/bam#Task
+:Task rdf:type owl:Class ;
+      rdfs:comment "An activity to be performed on an asset or location."@en ;
+      rdfs:label "Task"@en .
+
+
+###  https://w3id.org/bam#TaskStatus
+:TaskStatus rdf:type owl:Class ;
+            rdfs:label "TaskStatus"@en .
+
+
+###  https://w3id.org/bam#TimeSeries
+:TimeSeries rdf:type owl:Class ;
+            rdfs:subClassOf :DataAsset ;
+            rdfs:comment "A time-ordered sequence of sensor readings or measurements associated with a building asset, equipment item, or space. Examples include temperature logs, humidity readings, and energy consumption data."@en ;
+            rdfs:label "TimeSeries"@en .
+
+
+###  https://w3id.org/bam#TransformerRoom
+:TransformerRoom rdf:type owl:Class ;
+                 rdfs:subClassOf :PlaceOfSpecialHazard ;
+                 rdfs:comment "A transformer room is a dedicated space within a building that houses transformers and associated electrical equipment to step down high-voltage electricity from the grid to a usable low voltage for the building."@en ;
+                 rdfs:label "TransformerRoom"@en .
+
+
+###  https://w3id.org/bam#UsageType
+:UsageType rdf:type owl:Class ;
+           rdfs:comment "Classification of building, space or component usage."@en ;
+           rdfs:label "UsageType"@en .
+
+
+###  https://w3id.org/bam#UtilizationPlanning
+:UtilizationPlanning rdf:type owl:Class ;
+                     rdfs:subClassOf :UsageType ;
+                     rdfs:comment "Building planning of utilization."@en ;
+                     rdfs:label "UtilizationPurpose"@en .
+
+
+###  https://w3id.org/bam#VerticalTransportSystem
+:VerticalTransportSystem rdf:type owl:Class ;
+                         rdfs:subClassOf :BuildingSystem ;
+                         rdfs:comment "A Vertical Transport System (VT) in buildings refers to the equipment and planning used to move people and goods vertically between different floors."@en ;
+                         rdfs:label "VerticalTransportSystem"@en .
+
+
+###  https://w3id.org/bam#Wall
+:Wall rdf:type owl:Class ;
+      rdfs:subClassOf :StructuralElement ;
+      rdfs:comment "A wall in buildings is a vertical structure that defines and separates spaces, provides shelter and security, and can be either load-bearing or non-load-bearing."@en ;
+      rdfs:label "Wall"@en .
+
+
+###  https://w3id.org/bam#WallFoundation
+:WallFoundation rdf:type owl:Class ;
+                rdfs:subClassOf :StructuralElement ;
+                rdfs:label "Sub-structure component, typically concrete, brick, or masonry, that transfers loads from the building's walls down to the ground or a concrete footing"@en ,
+                           "WallFoundation"@en .
+
+
+###  https://w3id.org/bam#Warehouse
+:Warehouse rdf:type owl:Class ;
+           rdfs:subClassOf :SpaceUsage ;
+           rdfs:comment "A warehouse is a large building used for storing goods, such as raw materials, finished products, or equipment, until they are needed for manufacturing, distribution, or sale."@en ;
+           rdfs:label "Warehouse"@en .
+
+
+###  https://w3id.org/bam#Window
+:Window rdf:type owl:Class ;
+        rdfs:subClassOf :Closing ;
+        rdfs:comment "A window is an opening in a building wall for light and air, featuring casements or sashes with glass panes, enhancing natural lighting, ventilation, and aesthetics."@en ;
+        rdfs:label "Window"@en .
+
+
+###  https://w3id.org/bot#Building
+bot:Building rdf:type owl:Class ;
+             rdfs:subClassOf bot:Zone ;
+             owl:disjointWith bot:Site ,
+                              bot:Space ,
+                              bot:Storey ;
+             rdfs:comment """An independent unit of the built environment with a characteristic spatial structure, intended to serve at least one function or user activity [ISO 12006-2:2013]. A bot:Building is a part of the physical world or a virtual world that is inherently both located in this world and having a 3D spatial extent, is contained in a building site, and can contain one or more storeys that are vertically connected.
+Any permanent or temporary building but not any other kind of structure or erection. A reference to a building includes a reference to part of a building."""@en ;
+             rdfs:label "Building"@en .
+
+
+###  https://w3id.org/bot#Element
+bot:Element rdf:type owl:Class ;
+            owl:disjointWith bot:Interface ,
+                             bot:Zone ;
+            rdfs:comment "Physical building elements."@en ;
+            rdfs:label "Element"@en .
+
+
+###  https://w3id.org/bot#Interface
+bot:Interface rdf:type owl:Class ;
+              owl:disjointWith bot:Zone ;
+              rdfs:comment """A generic concept to qualify the relationship of two or more things in the world, where at least one is a building element or zone. Examples:
+    - Qualification of heat transmission between zones through one or more building elements. This includes one-dimensional (surface) heat losses from one zone to another through a single building element, a two dimensional (line) loss from one zone to another through the connection in which the two elements meet or a three dimensional (point) loss from one zone to another through the connection where three elements (typically two walls and a slab) meet. 
+    - Connection of an electric device to the electric system of a building. 
+    - A door between one room and another."""@en ;
+              rdfs:label "Interface"@en .
+
+
+###  https://w3id.org/bot#Site
+bot:Site rdf:type owl:Class ;
+         rdfs:subClassOf bot:Zone ;
+         owl:disjointWith bot:Space ,
+                          bot:Storey ;
+         rdfs:comment "The land occupied by the building, up to the boundaries with land in other ownership."@en ;
+         rdfs:label "Site"@en .
+
+
+###  https://w3id.org/bot#Space
+bot:Space rdf:type owl:Class ;
+          rdfs:subClassOf bot:Zone ;
+          owl:disjointWith bot:Storey ;
+          rdfs:label "A part of the physical world or a virtual world whose 3D spatial extent is bounded actually or theoretically, and provides for certain functions within the zone it is contained in."@en ,
+                     "Space"@en .
+
+
+###  https://w3id.org/bot#Storey
+bot:Storey rdf:type owl:Class ;
+           rdfs:subClassOf bot:Zone ;
+           rdfs:comment "A part of the physical world or a virtual world that is inherently both located in this world and having a 3D spatial extent. A bot:Storey is contained in one or more buildings, and is intended to contain one or more spaces that are horizontally connected. Storeys of a building are connected by means of vertical connections such as elevators and stairs. A bot:Storey encompasses both zones above and below ground, for example, a building with 21 floors above ground, one ground floor and 3 basements is equal to the sentence: A building has 25 instances of bot:Storey."@en ,
+                        """Includes any of the following.
+• Any gallery in an assembly building (purpose group 5).
+• Any gallery in any other type of building if its area is more than half that of the space into which it projects.
+• A roof, unless it is accessible only for maintenance and repair."""@en ;
+           rdfs:label "Storey"@en .
+
+
+###  https://w3id.org/bot#Zone
+bot:Zone rdf:type owl:Class ;
+         rdfs:comment "A part of the physical world or a virtual world that is inherently both located in this world and has a 3D spatial extent; Sub-classes of bot:Zone include bot:Site, bot:Building, bot:Storey, or bot:Space.  An instance of bot:Zone can contain other bot:Zone instances, making it possible to group or subdivide zones. An instance of bot:Zone can be adjacent to or intersecting other bot:Zone instances. Finally, a bot:Zone can instantiate three relations to bot:Element, which are either contained in (bot:containsElement), adjacent to it (bot:adjacentElement) or intersecting (bot:intersectingElement)."@en ;
+         rdfs:label "Zone"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://w3id.org/bam#Accommodation
+:Accommodation rdf:type owl:NamedIndividual ,
+                        :Accommodation .
+
+
+###  https://w3id.org/bam#AssemblyPlace
+:AssemblyPlace rdf:type owl:NamedIndividual ,
+                        :AssemblyPlace .
+
+
+###  https://w3id.org/bam#Auditorium
+:Auditorium rdf:type owl:NamedIndividual ,
+                     :Auditorium .
+
+
+###  https://w3id.org/bam#Bathroom
+:Bathroom rdf:type owl:NamedIndividual ,
+                   :Bathroom .
+
+
+###  https://w3id.org/bam#BoardingHouse
+:BoardingHouse rdf:type owl:NamedIndividual ,
+                        :BoardingHouse .
+
+
+###  https://w3id.org/bam#CarParking
+:CarParking rdf:type owl:NamedIndividual ,
+                     :CarParking .
+
+
+###  https://w3id.org/bam#CommercialPlace
+:CommercialPlace rdf:type owl:NamedIndividual ,
+                          :CommercialPlace .
+
+
+###  https://w3id.org/bam#Completed
+:Completed rdf:type owl:NamedIndividual ,
+                    :Completed .
+
+
+###  https://w3id.org/bam#DetentionHouse
+:DetentionHouse rdf:type owl:NamedIndividual ,
+                         :DetentionHouse .
+
+
+###  https://w3id.org/bam#Dwellinghouse
+:Dwellinghouse rdf:type owl:NamedIndividual ,
+                        :Dwellinghouse .
+
+
+###  https://w3id.org/bam#EntertainmentPlace
+:EntertainmentPlace rdf:type owl:NamedIndividual ,
+                             :EntertainmentPlace .
+
+
+###  https://w3id.org/bam#Factory
+:Factory rdf:type owl:NamedIndividual ,
+                  :Factory .
+
+
+###  https://w3id.org/bam#Flat
+:Flat rdf:type owl:NamedIndividual ,
+               :Flat .
+
+
+###  https://w3id.org/bam#Gallery
+:Gallery rdf:type owl:NamedIndividual ,
+                  :Gallery .
+
+
+###  https://w3id.org/bam#HabitableRoom
+:HabitableRoom rdf:type owl:NamedIndividual ,
+                        :HabitableRoom .
+
+
+###  https://w3id.org/bam#HallOfResidence
+:HallOfResidence rdf:type owl:NamedIndividual ,
+                          :HallOfResidence .
+
+
+###  https://w3id.org/bam#Hospital
+:Hospital rdf:type owl:NamedIndividual ,
+                   :Hospital .
+
+
+###  https://w3id.org/bam#Hostel
+:Hostel rdf:type owl:NamedIndividual ,
+                 :Hostel .
+
+
+###  https://w3id.org/bam#Hotel
+:Hotel rdf:type owl:NamedIndividual ,
+                :Hotel .
+
+
+###  https://w3id.org/bam#InProgress
+:InProgress rdf:type owl:NamedIndividual ,
+                     :InProgress .
+
+
+###  https://w3id.org/bam#Kitchen
+:Kitchen rdf:type owl:NamedIndividual ,
+                  :Kitchen .
+
+
+###  https://w3id.org/bam#Office
+:Office rdf:type owl:NamedIndividual ,
+                 :Office .
+
+
+###  https://w3id.org/bam#Pending
+:Pending rdf:type owl:NamedIndividual ,
+                  :Pending .
+
+
+###  https://w3id.org/bam#ResidentialCollege
+:ResidentialCollege rdf:type owl:NamedIndividual ,
+                             :ResidentialCollege .
+
+
+###  https://w3id.org/bam#School
+:School rdf:type owl:NamedIndividual ,
+                 :School .
+
+
+###  https://w3id.org/bam#ShelteredHousing
+:ShelteredHousing rdf:type owl:NamedIndividual ,
+                           :ShelteredHousing .
+
+
+###  https://w3id.org/bam#Shop
+:Shop rdf:type owl:NamedIndividual ,
+               :Shop .
+
+
+###  https://w3id.org/bam#Storage
+:Storage rdf:type owl:NamedIndividual ,
+                  :Storage .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://maxime-lefrancois.info/me#> <http://www.w3.org/2006/vcard/ns#fn> "Maxime Lefrançois" ;
+                                    <https://schema.org/name> "Maxime Lefrançois" .
+
+
+<https://orcid.org/0000-0001-8020-4609> <http://www.w3.org/2006/vcard/ns#fn> "Pieter Pauwels" ;
+                                        <https://schema.org/name> "Pieter Pauwels" .
+
+
+<https://orcid.org/0000-0002-2033-859X> <http://www.w3.org/2006/vcard/ns#fn> "Georg Ferdinand Schneider" ;
+                                        <https://schema.org/name> "Georg Ferdinand Schneider" .
+
+
+<https://orcid.org/0000-0002-6519-7057> <http://www.w3.org/2006/vcard/ns#fn> "Mads Holten Rasmussen" ;
+                                        <https://schema.org/name> "Mads Holten Rasmussen" .
+
+
+:Accommodation rdfs:comment "A utilization purpose for premises providing temporary or permanent residential living."@en ;
+               rdfs:label "Accommodation"@en .
+
+
+:AssemblyPlace rdfs:comment "A utilization purpose for premises used for public assembly, entertainment, or recreation."@en ;
+               rdfs:label "AssemblyPlace"@en .
+
+
+:Auditorium rdfs:comment "An auditorium is a large room or building designed for public gatherings, such as performances, lectures, or meetings."@en ;
+            rdfs:label "Auditorium"@en .
+
+
+:Bathroom rdfs:comment "a room for washing and personal hygiene, typically containing a toilet, sink, and either a bathtub or shower."@en ;
+          rdfs:label "Bathroom"@en .
+
+
+:BoardingHouse rdfs:comment "A utilization purpose for premises providing lodging and meals for paying guests."@en ;
+               rdfs:label "BoardingHouse"@en .
+
+
+:CarParking rdfs:comment "A utilization purpose for premises designed for vehicle parking and storage."@en ;
+            rdfs:label "CarParking"@en .
+
+
+:CommercialPlace rdfs:comment "A utilization purpose for premises used for commercial trading activities."@en ;
+                 rdfs:label "CommercialPlace"@en .
+
+
+:Completed rdfs:comment "Task status indicating the task has been finished."@en ;
+           rdfs:label "Completed"@en .
+
+
+:DetentionHouse rdfs:comment "A utilization purpose for premises used for lawful detention of persons."@en ;
+                rdfs:label "DetentionHouse"@en .
+
+
+:Dwellinghouse rdfs:comment "Does not include a flat or a building containing a flat."@en ;
+               rdfs:label "Dwellinghouse"@en .
+
+
+:EntertainmentPlace rdfs:comment "A utilization purpose for premises used for entertainment or recreational activities."@en ;
+                    rdfs:label "EntertainmentPlace"@en .
+
+
+:Factory rdfs:comment "A utilization purpose for premises used for manufacturing, processing, or industrial production."@en ;
+         rdfs:label "Factory"@en .
+
+
+:Flat rdfs:comment "A flat is a separate and self-contained premises constructed or adapted for use for residential purposes and forming part of a building from some other part of which it is divided horizontally."@en ;
+      rdfs:label "Flat"@en .
+
+
+:Gallery rdfs:comment "A floor or balcony that does not extend across the full extent of a building’s footprint and is open to the floor below."@en ;
+         rdfs:label "Gallery"@en .
+
+
+:HabitableRoom rdfs:comment "A room used, or intended to be used, for people to live in (including, for the purposes of Approved Document B Volumes 1 and 2, a kitchen, but not a bathroom)."@en ;
+               rdfs:label "HabitableRoom"@en .
+
+
+:HallOfResidence rdfs:comment "A utilization purpose for institutional residential accommodation, typically for students or workers."@en ;
+                 rdfs:label "HallOfResidence"@en .
+
+
+:Hospital rdfs:comment "A utilization purpose for premises providing medical treatment, care, or maintenance of persons."@en ;
+          rdfs:label "Hospital"@en .
+
+
+:Hostel rdfs:comment "A utilization purpose for premises providing basic shared accommodation."@en ;
+        rdfs:label "Hostel"@en .
+
+
+:Hotel rdfs:comment "A utilization purpose for premises providing temporary guest accommodation with services."@en ;
+       rdfs:label "Hotel"@en .
+
+
+:InProgress rdfs:comment "Task status indicating the task is currently being executed."@en ;
+            rdfs:label "InProgress"@en .
+
+
+:Kitchen rdfs:comment "A room for food preparation."@en ;
+         rdfs:label "Kitchen"@en .
+
+
+:Office rdfs:comment """Offices or premises used for any of the following and their control:
+• administration
+• clerical work (including writing, bookkeeping, sorting papers, filing, typing, duplicating, machine calculating, drawing and the editorial preparation of matter for publication, police and fire and rescue service work)
+• handling money (including banking and building society work)
+• communications (including postal, telegraph and radio communications)
+• radio, television, film, audio or video recording
+• performance (premises not open to the public)."""@en ;
+        rdfs:label "Office"@en .
+
+
+:Pending rdfs:comment "Task status indicating the task has been created but not yet started."@en ;
+         rdfs:label "Pending"@en .
+
+
+:ResidentialCollege rdfs:comment "A utilization purpose for a college providing on-site residential accommodation for students."@en ;
+                    rdfs:label "ResidentialCollege"@en .
+
+
+:School rdfs:comment "A place of education for children between 2 and 19 years old. The term includes nursery schools, primary schools and secondary schools as defined in the Education Act 1996."@en ;
+        rdfs:label "School"@en .
+
+
+:ShelteredHousing rdfs:comment "Includes two or more dwellings in the same building or on adjacent sites, designed and constructed as residential accommodation for vulnerable or elderly people who receive, or will receive, a support service."@en ;
+                  rdfs:label "ShelteredHousing"@en .
+
+
+:Shop rdfs:comment """Shops or premises used for either of the following.
+• A retail trade or business (including selling food or drink to the public for immediate consumption, retail by auction, self-selection and over the-counter wholesale trading, the business of lending books or periodicals for gain, the business of a barber or hairdresser, and the rental of storage space to the public).
+• Premises to which the public are invited either:
+– to deliver or collect goods in connection with their hire, repair or other treatment
+– (except in the case of repair of motor vehicles) where the public themselves may carry out such repairs or other treatments."""@en ;
+      rdfs:label "Shop"@en .
+
+
+:Storage rdfs:comment "A utilization purpose for premises used for storing goods or materials."@en ;
+         rdfs:label "Storage"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
