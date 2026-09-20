@@ -4,7 +4,7 @@
 
 > **BOMO → BAM:** The ontology was renamed from BOMO to BAM to shift focus from operational workflows to the **physical assets** that buildings are composed of — their topology, elements, equipment, and systems. Domain-specific applications are developed as **modular extensions** rather than built into the core.
 
-> **🔥 Active Development: [[FiCR (Fire Compliance and Risk Analysis)](https://github.com/RainGo111/FiCR)](https://github.com/RainGo111/FiCR-ontology)** is the first and most actively developed BAM extension, targeting **automated fire safety compliance checking and risk assessment** in existing buildings. It serves as both a standalone contribution to fire safety informatics and a proof of concept for BAM's extensibility architecture.
+> **🔥 Active Development: [FiCR (Fire Compliance and Risk Analysis)](https://github.com/RainGo111/FiCR-ontology)** is the first and most actively developed BAM extension, targeting **automated fire safety compliance checking and risk assessment** in existing buildings. It serves as both a standalone contribution to fire safety informatics and a proof of concept for BAM's extensibility architecture.
 >
 > [![FiCR Repo](https://img.shields.io/badge/GitHub-FiCR-blue?logo=github)](https://github.com/RainGo111/FiCR) &ensp; **Namespace:** `https://w3id.org/bam/ficr#`
 
